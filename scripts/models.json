@@ -1,0 +1,154 @@
+{
+  "shared": {
+    "cloudflaredUrls": [
+      "https://github.999cq.fun/https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe",
+      "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe"
+    ],
+    "llamaZipUrls": [
+      "https://github.999cq.fun/https://github.com/ggml-org/llama.cpp/releases/download/b9490/llama-b9490-bin-win-cuda-13.3-x64.zip",
+      "https://github.com/ggml-org/llama.cpp/releases/download/b9490/llama-b9490-bin-win-cuda-13.3-x64.zip"
+    ],
+    "cudartZipUrls": [
+      "https://github.999cq.fun/https://github.com/ggml-org/llama.cpp/releases/download/b9490/cudart-llama-bin-win-cuda-13.3-x64.zip",
+      "https://github.com/ggml-org/llama.cpp/releases/download/b9490/cudart-llama-bin-win-cuda-13.3-x64.zip"
+    ]
+  },
+  "models": {
+    "PADDLEOCR_VL_16": {
+      "family": "paddleocr-vl",
+      "modelDir": "G:/Models/PaddleOCR-VL",
+      "modelFileName": "PaddleOCR-VL-1.6-GGUF.gguf",
+      "mmprojFileName": "PaddleOCR-VL-1.6-GGUF-mmproj.gguf",
+      "ngl": 999,
+      "contextSize": 8192,
+      "maxTokens": 4096,
+      "modelUrls": [
+        "https://hf-mirror.com/PaddlePaddle/PaddleOCR-VL-1.6-GGUF/resolve/main/PaddleOCR-VL-1.6-GGUF.gguf",
+        "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6-GGUF/resolve/main/PaddleOCR-VL-1.6-GGUF.gguf"
+      ],
+      "mmprojUrls": [
+        "https://hf-mirror.com/PaddlePaddle/PaddleOCR-VL-1.6-GGUF/resolve/main/PaddleOCR-VL-1.6-GGUF-mmproj.gguf",
+        "https://huggingface.co/PaddlePaddle/PaddleOCR-VL-1.6-GGUF/resolve/main/PaddleOCR-VL-1.6-GGUF-mmproj.gguf"
+      ]
+    },
+    "Q8_K_P": {
+      "family": "qwen-gguf",
+      "modelDir": "G:/Models/HauhauCS",
+      "modelFileName": "QW36-35B-Q8_K_P.gguf",
+      "mmprojFileName": "mmproj-QW36-35B-f16.gguf",
+      "ngl": 15,
+      "contextSize": 4096,
+      "maxTokens": 4096,
+      "modelUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-Q8_K_P.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-Q8_K_P.gguf"
+      ],
+      "mmprojUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf"
+      ]
+    },
+    "Q6_K_P": {
+      "family": "qwen-gguf",
+      "modelDir": "G:/Models/HauhauCS",
+      "modelFileName": "QW36-35B-Q6_K_P.gguf",
+      "mmprojFileName": "mmproj-QW36-35B-f16.gguf",
+      "ngl": 18,
+      "contextSize": 6144,
+      "maxTokens": 4096,
+      "modelUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K_P.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-Q6_K_P.gguf"
+      ],
+      "mmprojUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf"
+      ]
+    },
+    "Q5_K_P": {
+      "family": "qwen-gguf",
+      "modelDir": "G:/Models/HauhauCS",
+      "modelFileName": "QW36-35B-Q5_K_P.gguf",
+      "mmprojFileName": "mmproj-QW36-35B-f16.gguf",
+      "ngl": 18,
+      "contextSize": 8192,
+      "maxTokens": 4096,
+      "modelUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-Q5_K_P.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-Q5_K_P.gguf"
+      ],
+      "mmprojUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf"
+      ]
+    },
+    "Q4_K_M": {
+      "family": "qwen-gguf",
+      "modelDir": "G:/Models/HauhauCS",
+      "modelFileName": "QW36-35B-Q4_K_M.gguf",
+      "mmprojFileName": "mmproj-QW36-35B-f16.gguf",
+      "ngl": 20,
+      "contextSize": 8192,
+      "maxTokens": 4096,
+      "modelUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-Q4_K_M.gguf"
+      ],
+      "mmprojUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf"
+      ]
+    },
+    "Q4_K_P": {
+      "family": "qwen-gguf",
+      "modelDir": "G:/Models/HauhauCS",
+      "modelFileName": "QW36-35B-Q4_K_P.gguf",
+      "mmprojFileName": "mmproj-QW36-35B-f16.gguf",
+      "ngl": 20,
+      "contextSize": 8192,
+      "maxTokens": 4096,
+      "modelUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-Q4_K_P.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-Q4_K_P.gguf"
+      ],
+      "mmprojUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf"
+      ]
+    },
+    "IQ4_NL": {
+      "family": "qwen-gguf",
+      "modelDir": "G:/Models/HauhauCS",
+      "modelFileName": "QW36-35B-IQ4_NL.gguf",
+      "mmprojFileName": "mmproj-QW36-35B-f16.gguf",
+      "ngl": 22,
+      "contextSize": 8192,
+      "maxTokens": 4096,
+      "modelUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_NL.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_NL.gguf"
+      ],
+      "mmprojUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf"
+      ]
+    },
+    "IQ4_XS": {
+      "family": "qwen-gguf",
+      "modelDir": "G:/Models/HauhauCS",
+      "modelFileName": "QW36-35B-IQ4_XS.gguf",
+      "mmprojFileName": "mmproj-QW36-35B-f16.gguf",
+      "ngl": 22,
+      "contextSize": 16384,
+      "maxTokens": 4096,
+      "modelUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_XS.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive-IQ4_XS.gguf"
+      ],
+      "mmprojUrls": [
+        "https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf",
+        "https://huggingface.co/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/mmproj-QW36-35B-A3B-Uncensored-HauhauCS-Aggressive-f16.gguf"
+      ]
+    }
+  }
+}

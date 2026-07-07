@@ -1,0 +1,16 @@
+.gradle/
+.idea/
+build/
+app/build/
+local.properties
+*.apk
+*.png
+*.xml
+tmp-*.png
+window_dump*.xml
+device-screen*.png
+installed-base.apk
+*.iml
+captures/
+*.log
+
