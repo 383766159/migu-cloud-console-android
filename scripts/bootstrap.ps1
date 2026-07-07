@@ -32,30 +32,30 @@ function Resolve-UrlList([object]$Value) {
 function Invoke-Download([string[]]$Urls, [string]$OutputPath, [string]$Label) {
   Ensure-Directory -Path (Split-Path -Parent $OutputPath)
   $uniqueUrls = @($Urls | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique)
-  if ($uniqueUrls.Count -eq 0) { throw "未提供可用下载地址: $Label" }
+  if ($uniqueUrls.Count -eq 0) { throw "No download URL available: $Label" }
 
   $tempPath = "$OutputPath.download"
   $lastError = ''
   foreach ($url in $uniqueUrls) {
-    Write-Stage "下载 $Label"
-    Write-Host "尝试地址: $url" -ForegroundColor DarkGray
+    Write-Stage "Downloading $Label"
+    Write-Host "Trying URL: $url" -ForegroundColor DarkGray
     if (Test-Path -LiteralPath $tempPath) {
       $existingSize = (Get-Item -LiteralPath $tempPath).Length
-      Write-Host "检测到未完成下载，继续续传: $existingSize bytes" -ForegroundColor DarkGray
+      Write-Host "Resume partial download: $existingSize bytes" -ForegroundColor DarkGray
     }
     & curl.exe -fL -C - --connect-timeout 10 --retry 5 --retry-all-errors --retry-delay 3 --speed-limit 16384 --speed-time 30 -o $tempPath $url
     if ($LASTEXITCODE -eq 0 -and (Test-Path -LiteralPath $tempPath)) {
       Move-Item -LiteralPath $tempPath -Destination $OutputPath -Force
       break
     }
-    $lastError = "地址失败: $url, curl 退出码 $LASTEXITCODE"
+    $lastError = "URL failed: $url, curl exit code $LASTEXITCODE"
     Write-Host $lastError -ForegroundColor Yellow
   }
 
   if (Test-Path -LiteralPath $tempPath -and Test-Path -LiteralPath $OutputPath) {
     Remove-Item -LiteralPath $tempPath -Force -ErrorAction SilentlyContinue
   }
-  if (-not (Test-Path -LiteralPath $OutputPath)) { throw "下载失败: $Label, $lastError" }
+  if (-not (Test-Path -LiteralPath $OutputPath)) { throw "Download failed: $Label, $lastError" }
 }
 
 function Test-ZipFile([string]$Path) {
@@ -90,14 +90,14 @@ function Wait-HttpReady([string]$Url, [int]$TimeoutSeconds = 180) {
 
 $normalizedBaseUrl = $RepoBaseUrl.Trim().TrimEnd('/')
 if ([string]::IsNullOrWhiteSpace($normalizedBaseUrl)) {
-  throw 'RepoBaseUrl 不能为空'
+  throw 'RepoBaseUrl must not be empty'
 }
 
-Write-Stage '读取仓库模型清单'
+Write-Stage 'Loading model manifest'
 $manifest = Invoke-RestMethod -UseBasicParsing -Uri "${normalizedBaseUrl}/models.json"
 $modelEntry = $manifest.models.PSObject.Properties[$ModelKey]
 if (-not $modelEntry) {
-  throw "仓库脚本未找到模型配置: $ModelKey"
+  throw "Model config not found: $ModelKey"
 }
 
 $shared = $manifest.shared
@@ -135,7 +135,7 @@ if (-not (Test-Path -LiteralPath $llamaZipPath) -or -not (Test-ZipFile -Path $ll
   Invoke-Download -Urls $llamaZipUrls -OutputPath $llamaZipPath -Label 'llama.cpp'
 }
 
-Write-Stage '解压运行库与 llama.cpp'
+Write-Stage 'Extracting runtime and llama.cpp'
 Expand-Archive -LiteralPath $cudartZipPath -DestinationPath $llamaDir -Force
 Expand-Archive -LiteralPath $llamaZipPath -DestinationPath $llamaDir -Force
 
@@ -148,9 +148,9 @@ if ($mmprojPath -and -not (Test-Path -LiteralPath $mmprojPath)) {
 }
 
 $server = Resolve-LlamaServer -Root $llamaDir
-if (-not $server) { throw '未找到 llama-server.exe' }
+if (-not $server) { throw 'llama-server.exe not found' }
 
-Write-Stage '启动模型服务'
+Write-Stage 'Starting model server'
 $serverArgs = @(
   '-m', $modelPath,
   '-ngl', "$($model.ngl)",
@@ -168,18 +168,18 @@ if ($model.family -eq 'paddleocr-vl') {
 
 Start-Process -FilePath $server -ArgumentList $serverArgs -WorkingDirectory (Split-Path -Parent $server)
 
-Write-Stage '等待本地 OpenAI 接口就绪'
+Write-Stage 'Waiting for local OpenAI API'
 if (-not (Wait-HttpReady -Url "http://127.0.0.1:${Port}/v1/models" -TimeoutSeconds 180)) {
-  throw 'llama-server 已启动，但 /v1/models 在 180 秒内未就绪'
+  throw 'llama-server started, but /v1/models was not ready within 180 seconds'
 }
 
-Write-Stage '启动 Cloudflare Tunnel'
+Write-Stage 'Starting Cloudflare Tunnel'
 $tunnelTokenPath = Join-Path $llamaDir "llama-${Port}.token"
 Set-Content -LiteralPath $tunnelTokenPath -Value $TunnelToken -Encoding ASCII
 Start-Process -FilePath $cloudflaredPath -ArgumentList @('tunnel', 'run', '--token-file', $tunnelTokenPath) -WorkingDirectory $llamaDir
 
-Write-Stage '部署完成'
-Write-Host "模型: $($model.modelFileName)" -ForegroundColor Green
-Write-Host "本地 API: http://127.0.0.1:${Port}/v1/models" -ForegroundColor Green
-Write-Host "公网域名: https://$TunnelHostname" -ForegroundColor Green
-Write-Host "完成时间: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" -ForegroundColor Green
+Write-Stage 'Bootstrap completed'
+Write-Host "Model: $($model.modelFileName)" -ForegroundColor Green
+Write-Host "Local API: http://127.0.0.1:${Port}/v1/models" -ForegroundColor Green
+Write-Host "Public Host: https://$TunnelHostname" -ForegroundColor Green
+Write-Host "Completed At: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" -ForegroundColor Green
