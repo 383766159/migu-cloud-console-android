@@ -14,7 +14,7 @@ class BootstrapScriptGeneratorTest {
 
     @Test
     fun `bootstrap script should include tunnel token`() {
-        val settings = AppSettings(tunnelToken = "token-123", modelVariant = "Q4_K_M")
+        val settings = AppSettings(tunnelToken = "token-123", modelVariant = "Q4_K_M", bootstrapRepoBaseUrl = "")
         val model = ModelCatalog.getModel(settings.modelVariant)
         val text = BootstrapScriptGenerator.buildScript(settings, model)
         assertTrue(text.contains("token-123"))
@@ -23,18 +23,18 @@ class BootstrapScriptGeneratorTest {
 
     @Test
     fun `bootstrap script should route github downloads through mirror`() {
-        val settings = AppSettings(modelVariant = "Q4_K_M")
+        val settings = AppSettings(modelVariant = "Q4_K_M", bootstrapRepoBaseUrl = "")
         val model = ModelCatalog.getModel(settings.modelVariant)
         val text = BootstrapScriptGenerator.buildScript(settings, model)
-        assertTrue(text.contains("https://github.999cq.fun/https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe"))
-        assertTrue(text.contains("https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe"))
-        assertTrue(text.contains("https://github.999cq.fun/https://github.com/ggml-org/llama.cpp/releases/download/b9490/llama-b9490-bin-win-cuda-13.3-x64.zip"))
-        assertTrue(text.contains("https://github.999cq.fun/https://github.com/ggml-org/llama.cpp/releases/download/b9490/cudart-llama-bin-win-cuda-13.3-x64.zip"))
+        assertTrue(text.contains("https://github.999cq.fun/https://github.com/383766159/migu-cloud-console-android/releases/download/deps-win-cuda13.3-b9490/cfw.exe"))
+        assertTrue(text.contains("https://github.com/383766159/migu-cloud-console-android/releases/download/deps-win-cuda13.3-b9490/cfw.exe"))
+        assertTrue(text.contains("https://github.999cq.fun/https://github.com/383766159/migu-cloud-console-android/releases/download/deps-win-cuda13.3-b9490/llama-win-cuda133-b9490.zip"))
+        assertTrue(text.contains("https://github.999cq.fun/https://github.com/383766159/migu-cloud-console-android/releases/download/deps-win-cuda13.3-b9490/cudart-win-cuda133-b9490.zip"))
     }
 
     @Test
     fun `bootstrap script should include hugging face mirror candidates`() {
-        val settings = AppSettings(modelVariant = "Q4_K_M")
+        val settings = AppSettings(modelVariant = "Q4_K_M", bootstrapRepoBaseUrl = "")
         val model = ModelCatalog.getModel(settings.modelVariant)
         val text = BootstrapScriptGenerator.buildScript(settings, model)
         assertTrue(text.contains("https://hf-mirror.com/HauhauCS/Qwen3.6-35B-A3B-Uncensored-HauhauCS-Aggressive/resolve/main/${model.remoteName}"))
@@ -67,5 +67,7 @@ class BootstrapScriptGeneratorTest {
         assertTrue(text.contains("-RepoBaseUrl 'https://github.999cq.fun/https://raw.githubusercontent.com/demo/repo/main/scripts'"))
         assertTrue(text.contains("-ModelKey 'PADDLEOCR_VL_16'"))
         assertTrue(text.contains("-TunnelToken 'token-123'"))
+        assertTrue(!text.contains('\n'))
+        assertTrue(!text.contains("`"))
     }
 }

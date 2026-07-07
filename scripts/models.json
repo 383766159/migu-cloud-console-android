@@ -1,16 +1,16 @@
 {
   "shared": {
     "cloudflaredUrls": [
-      "https://github.999cq.fun/https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe",
-      "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe"
+      "https://github.999cq.fun/https://github.com/383766159/migu-cloud-console-android/releases/download/deps-win-cuda13.3-b9490/cfw.exe",
+      "https://github.com/383766159/migu-cloud-console-android/releases/download/deps-win-cuda13.3-b9490/cfw.exe"
     ],
     "llamaZipUrls": [
-      "https://github.999cq.fun/https://github.com/ggml-org/llama.cpp/releases/download/b9490/llama-b9490-bin-win-cuda-13.3-x64.zip",
-      "https://github.com/ggml-org/llama.cpp/releases/download/b9490/llama-b9490-bin-win-cuda-13.3-x64.zip"
+      "https://github.999cq.fun/https://github.com/383766159/migu-cloud-console-android/releases/download/deps-win-cuda13.3-b9490/llama-win-cuda133-b9490.zip",
+      "https://github.com/383766159/migu-cloud-console-android/releases/download/deps-win-cuda13.3-b9490/llama-win-cuda133-b9490.zip"
     ],
     "cudartZipUrls": [
-      "https://github.999cq.fun/https://github.com/ggml-org/llama.cpp/releases/download/b9490/cudart-llama-bin-win-cuda-13.3-x64.zip",
-      "https://github.com/ggml-org/llama.cpp/releases/download/b9490/cudart-llama-bin-win-cuda-13.3-x64.zip"
+      "https://github.999cq.fun/https://github.com/383766159/migu-cloud-console-android/releases/download/deps-win-cuda13.3-b9490/cudart-win-cuda133-b9490.zip",
+      "https://github.com/383766159/migu-cloud-console-android/releases/download/deps-win-cuda13.3-b9490/cudart-win-cuda133-b9490.zip"
     ]
   },
   "models": {

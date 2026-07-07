@@ -8,9 +8,10 @@ object BootstrapScriptGenerator {
 
     private const val githubMirrorPrefix = "https://github.999cq.fun/"
     private const val huggingFaceMirrorPrefix = "https://hf-mirror.com/"
-    private const val cloudflaredGithubUrl = "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe"
-    private const val llamaZipGithubUrl = "https://github.com/ggml-org/llama.cpp/releases/download/b9490/llama-b9490-bin-win-cuda-13.3-x64.zip"
-    private const val cudartZipGithubUrl = "https://github.com/ggml-org/llama.cpp/releases/download/b9490/cudart-llama-bin-win-cuda-13.3-x64.zip"
+    private const val dependencyReleaseBaseUrl = "https://github.com/383766159/migu-cloud-console-android/releases/download/deps-win-cuda13.3-b9490"
+    private const val cloudflaredGithubUrl = "$dependencyReleaseBaseUrl/cfw.exe"
+    private const val llamaZipGithubUrl = "$dependencyReleaseBaseUrl/llama-win-cuda133-b9490.zip"
+    private const val cudartZipGithubUrl = "$dependencyReleaseBaseUrl/cudart-win-cuda133-b9490.zip"
 
     fun normalizeBootstrapRepoBaseUrl(url: String): String {
         return url.trim().trimEnd('/')
@@ -136,18 +137,20 @@ curl -X POST "$baseUrl/v1/chat/completions" \
 
     private fun buildRepositoryBootstrapCommand(repoBaseUrl: String, settings: AppSettings, model: ModelInfo): String {
         val normalizedBase = normalizeBootstrapRepoBaseUrl(repoBaseUrl)
-        return """
-${'$'}scriptBase = ${toPowerShellSingleQuoted(normalizedBase)}
-${'$'}scriptPath = Join-Path ${'$'}env:TEMP 'migu-bootstrap.ps1'
-iwr -UseBasicParsing "${'$'}scriptBase/bootstrap.ps1" -OutFile ${'$'}scriptPath
-& powershell.exe -NoProfile -ExecutionPolicy Bypass -File ${'$'}scriptPath `
-  -RepoBaseUrl ${toPowerShellSingleQuoted(normalizedBase)} `
-  -ModelKey ${toPowerShellSingleQuoted(model.key)} `
-  -Port ${settings.port} `
-  -TunnelHostname ${toPowerShellSingleQuoted(settings.tunnelHostname)} `
-  -TunnelToken ${toPowerShellSingleQuoted(settings.tunnelToken)} `
-  -CloudflaredUrl ${toPowerShellSingleQuoted(settings.cloudflaredUrl)}
-        """.trimIndent()
+        val segments = listOf(
+            "${'$'}ProgressPreference='SilentlyContinue'",
+            "${'$'}scriptBase=${toPowerShellSingleQuoted(normalizedBase)}",
+            "${'$'}scriptPath=Join-Path ${'$'}env:TEMP 'migu-bootstrap.ps1'",
+            "iwr -UseBasicParsing (\"${'$'}scriptBase/bootstrap.ps1\") -OutFile ${'$'}scriptPath",
+            "& powershell.exe -NoProfile -ExecutionPolicy Bypass -File ${'$'}scriptPath " +
+                "-RepoBaseUrl ${toPowerShellSingleQuoted(normalizedBase)} " +
+                "-ModelKey ${toPowerShellSingleQuoted(model.key)} " +
+                "-Port ${settings.port} " +
+                "-TunnelHostname ${toPowerShellSingleQuoted(settings.tunnelHostname)} " +
+                "-TunnelToken ${toPowerShellSingleQuoted(settings.tunnelToken)} " +
+                "-CloudflaredUrl ${toPowerShellSingleQuoted(settings.cloudflaredUrl)}",
+        )
+        return segments.joinToString("; ")
     }
 
     private fun buildQwenScript(settings: AppSettings, model: ModelInfo): String {
