@@ -52,7 +52,7 @@ function Invoke-Download([string[]]$Urls, [string]$OutputPath, [string]$Label) {
     Write-Host $lastError -ForegroundColor Yellow
   }
 
-  if (Test-Path -LiteralPath $tempPath -and Test-Path -LiteralPath $OutputPath) {
+  if ((Test-Path -LiteralPath $tempPath) -and (Test-Path -LiteralPath $OutputPath)) {
     Remove-Item -LiteralPath $tempPath -Force -ErrorAction SilentlyContinue
   }
   if (-not (Test-Path -LiteralPath $OutputPath)) { throw "Download failed: $Label, $lastError" }
