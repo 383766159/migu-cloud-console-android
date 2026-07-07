@@ -94,7 +94,7 @@ if ([string]::IsNullOrWhiteSpace($normalizedBaseUrl)) {
 }
 
 Write-Stage '读取仓库模型清单'
-$manifest = Invoke-RestMethod -UseBasicParsing -Uri "$normalizedBaseUrl/models.json"
+$manifest = Invoke-RestMethod -UseBasicParsing -Uri "${normalizedBaseUrl}/models.json"
 $modelEntry = $manifest.models.PSObject.Properties[$ModelKey]
 if (-not $modelEntry) {
   throw "仓库脚本未找到模型配置: $ModelKey"
@@ -169,17 +169,17 @@ if ($model.family -eq 'paddleocr-vl') {
 Start-Process -FilePath $server -ArgumentList $serverArgs -WorkingDirectory (Split-Path -Parent $server)
 
 Write-Stage '等待本地 OpenAI 接口就绪'
-if (-not (Wait-HttpReady -Url "http://127.0.0.1:$Port/v1/models" -TimeoutSeconds 180)) {
+if (-not (Wait-HttpReady -Url "http://127.0.0.1:${Port}/v1/models" -TimeoutSeconds 180)) {
   throw 'llama-server 已启动，但 /v1/models 在 180 秒内未就绪'
 }
 
 Write-Stage '启动 Cloudflare Tunnel'
-$tunnelTokenPath = Join-Path $llamaDir "llama-$Port.token"
+$tunnelTokenPath = Join-Path $llamaDir "llama-${Port}.token"
 Set-Content -LiteralPath $tunnelTokenPath -Value $TunnelToken -Encoding ASCII
 Start-Process -FilePath $cloudflaredPath -ArgumentList @('tunnel', 'run', '--token-file', $tunnelTokenPath) -WorkingDirectory $llamaDir
 
 Write-Stage '部署完成'
 Write-Host "模型: $($model.modelFileName)" -ForegroundColor Green
-Write-Host "本地 API: http://127.0.0.1:$Port/v1/models" -ForegroundColor Green
+Write-Host "本地 API: http://127.0.0.1:${Port}/v1/models" -ForegroundColor Green
 Write-Host "公网域名: https://$TunnelHostname" -ForegroundColor Green
 Write-Host "完成时间: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" -ForegroundColor Green
