@@ -108,11 +108,10 @@ $modelPath = Join-Path $modelDir "$($model.modelFileName)"
 $mmprojPath = if ($model.mmprojFileName) { Join-Path $modelDir "$($model.mmprojFileName)" } else { $null }
 $llamaZipUrls = Resolve-UrlList $shared.llamaZipUrls
 $cudartZipUrls = Resolve-UrlList $shared.cudartZipUrls
-$cloudflaredUrls = @()
+$cloudflaredUrls = Resolve-UrlList $shared.cloudflaredUrls
 if (-not [string]::IsNullOrWhiteSpace($CloudflaredUrl)) {
   $cloudflaredUrls += $CloudflaredUrl.Trim()
 }
-$cloudflaredUrls += Resolve-UrlList $shared.cloudflaredUrls
 $cloudflaredUrls = @($cloudflaredUrls | Select-Object -Unique)
 $modelUrls = Resolve-UrlList $model.modelUrls
 $mmprojUrls = Resolve-UrlList $model.mmprojUrls
